@@ -3,15 +3,18 @@ import startTradeBot from "./src/main";
 import connectMongodb from "./src/services/mongodb";
 import redisClient from "./src/services/redis";
 
+async function init() {
+  try {
+    await connectMongodb();
+    console.log("MongoDB connected");
+    await connectRedis();
+  } catch (error) {
+    console.error("Initialization failed", error);
+  }
+}
 
-// connect mongodb
-connectMongodb()
-  .then(() => {
-    console.log('MongoDB connected');
-    // redis
-    connectRedis();
-  })
-  .catch(error => console.log("MongoDB connect failed", error));
+
+init();
 
 // connect redis
 const connectRedis = () => {
@@ -41,3 +44,4 @@ const connectRedis = () => {
 
   redisClient.connect();
 }
+
