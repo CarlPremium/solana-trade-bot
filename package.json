@@ -7,11 +7,15 @@
     "serve": "nodemon ./serve.ts",
     "start": "npx ts-node serve.ts",
     "build": "npm run clean && tsc",
+    "clean": "rm -rf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@jup-ag/api": "^6.0.20",
     "@jup-ag/referral-sdk": "^0.1.6",
