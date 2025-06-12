@@ -1,95 +1,41 @@
-# Telegram Solana Bot (Raydium, Jupiter, Pump.fun)
-## Main Features
+# Solana Trade Bot
 
-- Track All tokens, All Pools on Raydium(AMM, CLMM), Jupiter, Pump.fun 
-- Buy and sell all SPL tokens using JITO on Raydium, Jupiter, Pump.fun
-- Auto-buy/sell according to the user setting
-- PNL Card generation
-- Provide a security by creating new GT wallet, not requires user wallet private key
+A premium Telegram bot for trading SPL tokens on Solana via Raydium, Jupiter, and Pump.fun. It automates buying, selling, and monitoring pools so you can stay ahead of the market.
 
-## Screenshot
+![Screenshot](a.jpg)
 
-![6](https://github.com/btcoin23/Growtradebot/assets/138183918/351d8203-6f4d-4560-8b70-cecf0468ad9a)
-![z](https://github.com/btcoin23/Growtradebot/assets/138183918/20e824c4-82ab-4774-a4b3-5434d4cf925f)
+## Why Choose This Bot?
 
-## Tech stack
-- Typescript
-- Telegram API
-- Solana/web3
-- Raydium SDK
-- Jupiter API
-- Pump.fun
-- JITO
-- Birdeye API
-- MongoDB
-- Redis
+- **Real-time pool monitoring** across major DEX platforms
+- **Automated trading tools** with customizable strategies
+- **Secure operations** using dedicated wallets
+- **PNL card generation** for easy profit tracking
+- **Referral features** to help grow your community
 
-## Prerequisites
+## Quick Start
 
-Before you begin, ensure you have met the following requirements:
+1. Clone the repository and install dependencies:
+   ```bash
+   git clone <repo-url>
+   cd solana-trade-bot
+   npm install
+   ```
+2. Copy `.env.example` to `.env` and fill in the required tokens and API keys.
+3. Run the bot in development mode:
+   ```bash
+   npm run serve
+   ```
 
-- Node.js installed (v18 or above recommended)
-- Telegram bot token from bot father
-- MongoDB Cluster URI
-- Redis URI
+For production deployments, run `npm run build` followed by `npm start`.
 
-## Configurations
+## Configuration
 
-1. Clone the repository:
+Environment variables control how the bot connects to Telegram, MongoDB, Redis, and the Solana network. See [`SETUP.md`](SETUP.md) for a full explanation of each option.
 
-```sh
-git clone https://github.com/btcoin23/Growtradebot.git
-```
+## Disclaimer
 
-2. Go to the project directory:
+This project is provided "as is" without warranties of any kind. Use it at your own risk. Cryptocurrency trading carries significant risk, and nothing in this repository constitutes financial advice.
 
-```sh
-cd Growtradebot
-```
+## Contact
 
-3. Install the dependencies:
-
-```sh
-npm install
-```
-
-4. Create a new `.env` file and add your Private key, Rpc URL
-
-`.env` file
-```sh
-MONGODB_URL=
-REDIS_URI=
-
-# Local
-GROWTRADE_BOT_ID=
-GROWSOL_ALERT_BOT_ID=
-BridgeBotID=
-ALERT_BOT_API_TOKEN=
-TELEGRAM_BOT_API_TOKEN=
-
-MAINNET_RPC=
-PRIVATE_RPC_ENDPOINT=
-RPC_WEBSOCKET_ENDPOINT=
-
-JITO_UUID=
-
-BIRD_EVE_API=
-
-GROWSOL_API_ENDPOINT=
-
-PNL_IMG_GENERATOR_API=
-
-```
-
-5. Then run the bot
-
-```sh
-npm run serve
-```
-
-## Version 1.0,   21/6/2024
-
-## Contact me
-- [Telegram](https://t.me/BTC0in23)
-
-- [Github](https://github.com/btcoin23)
+Questions or suggestions? Reach out on [Telegram](https://t.me/BTC0in23).
