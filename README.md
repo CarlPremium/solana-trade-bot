@@ -12,6 +12,13 @@ A premium Telegram bot for trading SPL tokens on Solana via Raydium, Jupiter, an
 - **PNL card generation** for easy profit tracking
 - **Referral features** to help grow your community
 
+## What's New
+
+- Optional Jito bundle UUID support. The bot automatically falls back to standard
+  transaction submission when `JITO_UUID` is not configured.
+- Improved Telegram UI with a `/help` command for quick access to common actions.
+- Better Redis initialization to improve stability under heavy user load.
+
 ## Quick Start
 
 1. Clone the repository and install dependencies:

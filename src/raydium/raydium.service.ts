@@ -259,12 +259,12 @@ export class RaydiumSwapService {
       const is_buy = inputMint === NATIVE_MINT.toString();
       const mint = is_buy ? outputMint : inputMint;
 
-      let total_fee_percent = 0.01; // 1%
-      let total_fee_percent_in_sol = 0.01; // 1%
+      let total_fee_percent = 0.0025; // 0.25%
+      let total_fee_percent_in_sol = 0.0025; // 0.25%
       let total_fee_percent_in_token = 0;
 
       if (isFeeBurn) {
-        total_fee_percent_in_sol = 0.0075;
+        total_fee_percent_in_sol = 0.001875;
         total_fee_percent_in_token =
           total_fee_percent - total_fee_percent_in_sol;
       }

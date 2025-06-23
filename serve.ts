@@ -3,21 +3,7 @@ import startTradeBot from "./src/main";
 import connectMongodb from "./src/services/mongodb";
 import redisClient from "./src/services/redis";
 
-async function init() {
-  try {
-    await connectMongodb();
-    console.log("MongoDB connected");
-    await connectRedis();
-  } catch (error) {
-    console.error("Initialization failed", error);
-  }
-}
-
-
-init();
-
-// connect redis
-const connectRedis = () => {
+async function connectRedis() {
   redisClient.on('connect', function () {
     console.log('Redis database connected' + '\n');
     // start tradeBot
@@ -41,7 +27,18 @@ const connectRedis = () => {
     console.log('Server is going down now...');
     process.exit();
   });
-
-  redisClient.connect();
+  await redisClient.connect();
 }
+
+async function init() {
+  try {
+    await connectMongodb();
+    console.log("MongoDB connected");
+    await connectRedis();
+  } catch (error) {
+    console.error("Initialization failed", error);
+  }
+}
+
+init();
 
