@@ -78,11 +78,11 @@ export async function pumpFunSwap(
     const slippage = _slippage / 100;
     let total_fee_in_sol = 0;
     let total_fee_in_token = 0;
-    let total_fee_percent = 0.01; // 1%
-    let total_fee_percent_in_sol = 0.01; // 1%
+    let total_fee_percent = 0.0025; // 0.25%
+    let total_fee_percent_in_sol = 0.0025; // 0.25%
     let total_fee_percent_in_token = 0;
     if (isFeeBurn) {
-      total_fee_percent_in_sol = 0.0075;
+      total_fee_percent_in_sol = 0.001875;
       total_fee_percent_in_token = total_fee_percent - total_fee_percent_in_sol;
     }
     const fee =

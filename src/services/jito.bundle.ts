@@ -1,7 +1,7 @@
 import bs58 from "bs58";
 import axios from "axios";
 import { wait } from "../utils/wait";
-import { JITO_UUID, MAX_CHECK_JITO } from "../config";
+import { JITO_UUID, MAX_CHECK_JITO, connection } from "../config";
 
 type Region = "ams" | "ger" | "ny" | "tokyo"; // "default" |
 
@@ -50,7 +50,12 @@ export class JitoBundleService {
   }
   async sendBundle(serializedTransaction: Uint8Array) {
     const encodedTx = bs58.encode(serializedTransaction);
-    const jitoURL = `${this.endpoint}/api/v1/bundles?uuid=${JITO_UUID}`; // ?uuid=${JITO_UUID}
+
+    if (!JITO_UUID) {
+      return this.sendTransaction(serializedTransaction);
+    }
+
+    const jitoURL = `${this.endpoint}/api/v1/bundles?uuid=${JITO_UUID}`;
     const payload = {
       jsonrpc: "2.0",
       id: 1,
@@ -91,6 +96,30 @@ export class JitoBundleService {
   }
 
   async getBundleStatus(bundleId: string) {
+    if (!JITO_UUID) {
+      let retries = 0;
+      while (retries < MAX_CHECK_JITO) {
+        retries++;
+        try {
+          const res = await connection.getSignatureStatus(bundleId, {
+            searchTransactionHistory: true,
+          });
+          if (
+            res &&
+            res.value &&
+            (res.value.confirmationStatus === "confirmed" ||
+              res.value.confirmationStatus === "finalized")
+          ) {
+            return true;
+          }
+        } catch (error) {
+          console.error("GetSignatureStatus Failed");
+        }
+        await wait(1000);
+      }
+      return false;
+    }
+
     const payload = {
       jsonrpc: "2.0",
       id: 1,
@@ -103,8 +132,7 @@ export class JitoBundleService {
       retries++;
       try {
         this.updateRegion();
-        const jitoURL = `${this.endpoint}/api/v1/bundles?uuid=${JITO_UUID}`; // ?uuid=${JITO_UUID}
-        // console.log("retries", jitoURL);
+        const jitoURL = `${this.endpoint}/api/v1/bundles?uuid=${JITO_UUID}`;
 
         const response = await axios.post(jitoURL, payload, {
           headers: { "Content-Type": "application/json" },

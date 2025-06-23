@@ -5,6 +5,7 @@ import { WelcomeScreenHandler } from "./screens/welcome.screen";
 import { callbackQueryHandler } from "./controllers/callback.handler";
 import { messageHandler } from "./controllers/message.handler";
 import { positionScreenHandler } from "./screens/position.screen";
+import { helpScreenHandler } from "./screens/help.screen";
 import { UserService } from "./services/user.service";
 import {
   alertBot,
@@ -95,6 +96,10 @@ const startTradeBot = () => {
 
   bot.onText(/\/settings/, async (msg: TelegramBot.Message) => {
     await settingScreenHandler(bot, msg);
+  });
+
+  bot.onText(/\/help/, async (msg: TelegramBot.Message) => {
+    await helpScreenHandler(bot, msg);
   });
 
   alertBot.onText(/\/start/, async (msg: TelegramBot.Message) => {
